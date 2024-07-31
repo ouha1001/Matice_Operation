@@ -1,0 +1,40 @@
+﻿<Window x:Class="Matice_Operation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Matice_Operation"
+        mc:Ignorable="d"
+        Title="Matrice Rechner" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="339*"/>
+            <ColumnDefinition Width="461*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="size1" Content="Size :" HorizontalAlignment="Left" Height="40" Margin="23,23,0,0" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="size" HorizontalAlignment="Left" Height="40" Margin="140,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101"/>
+        <Label Content="Matrice 1 : " HorizontalAlignment="Left" Height="40" Margin="23,84,0,0" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="m1" HorizontalAlignment="Left" Height="40" Margin="140,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" Grid.ColumnSpan="2"/>
+        <Label x:Name="matrice2" Content="Matrice 2 : " HorizontalAlignment="Left" Height="40" Margin="23,162,0,0" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="m2" HorizontalAlignment="Left" Height="40" Margin="140,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" Grid.ColumnSpan="2"/>
+        <Button Content="+" HorizontalAlignment="Left" Height="50" Margin="201,23,0,0" VerticalAlignment="Top" Width="50" Click="Button_Click_2" Grid.Column="1"/>
+        <Button Content="-" HorizontalAlignment="Left" Height="50" Margin="272,23,0,0" VerticalAlignment="Top" Width="50" Click="Button_Click_2" Grid.Column="1"/>
+        <Button Content="*" HorizontalAlignment="Left" Height="50" Margin="350,23,0,0" VerticalAlignment="Top" Width="50" Click="Button_Click_2" Grid.Column="1"/>
+        <Button Content="/" HorizontalAlignment="Left" Height="50" Margin="201,94,0,0" VerticalAlignment="Top" Width="50" Click="Button_Click_2" Grid.Column="1"/>
+        <Button Content="%" HorizontalAlignment="Left" Height="50" Margin="272,94,0,0" VerticalAlignment="Top" Width="50"  Grid.Column="1" Click="Button_Click_4"/>
+        <Button Content="D" HorizontalAlignment="Left" Height="50" Margin="350,94,0,0" VerticalAlignment="Top" Width="50"  Grid.Column="1" Click="Button_Click_5" />
+        <Button Content="=" HorizontalAlignment="Left" Height="50" Margin="201,167,0,0" VerticalAlignment="Top" Width="50" Click="Button_Click_3" Grid.Column="1"/>
+        <Button Content="CE" HorizontalAlignment="Left" Height="50" Margin="272,167,0,0" VerticalAlignment="Top" Width="50" Click="Button_Click" Grid.Column="1"/>
+        <Button Content="C" HorizontalAlignment="Left" Height="50" Margin="350,167,0,0" VerticalAlignment="Top" Width="50" Click="Button_Click_1" Grid.Column="1"/>
+        <Label x:Name="M1" Content="" HorizontalAlignment="Left" Height="160" Margin="23,225,0,0" VerticalAlignment="Top" Width="220" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
+        <Label x:Name="M2" Content="" HorizontalAlignment="Left" Height="160" Margin="315,225,0,0" VerticalAlignment="Top" Width="220" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Grid.ColumnSpan="2"/>
+        <Label x:Name="res" Content="" HorizontalAlignment="Left" Height="160" Margin="219,225,0,0" VerticalAlignment="Top" Width="220" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Grid.Column="1"/>
+        <Label x:Name="op" Content="" HorizontalAlignment="Left" Height="40" Margin="261,285,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.528,1.083" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
+        <CheckBox x:Name="chek1" Content="CheckBox" HorizontalAlignment="Left" Height="20" Margin="261,31,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="1.071,-0.408" ClickMode="Release" IsThreeState="True" AutomationProperties.Name="chek" Checked="chek_Checked" />
+        <CheckBox x:Name="chek" Content="CheckBox" HorizontalAlignment="Left" Height="20" Margin="41,31,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="1.071,-0.408" Grid.Column="1" Checked="chek_Checked" IsChecked="True"/>
+        <Label x:Name="check1" Content="Indiv" HorizontalAlignment="Left" Height="40" Margin="286,23,0,0" VerticalAlignment="Top" Width="89" RenderTransformOrigin="0.303,0.347" Grid.ColumnSpan="2"/>
+        <Label x:Name="check" Content="Matrice" HorizontalAlignment="Left" Height="40" Margin="66,23,0,0" VerticalAlignment="Top" Width="89" RenderTransformOrigin="0.303,0.347" Grid.Column="1"/>
+
+
+    </Grid>
+</Window>
