@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -62,6 +63,47 @@ namespace Matice_Operation
                 M2.Content += "\n";
             }
         }
+        /// <summary>
+        /// Convert the Matrixe from string to integer
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        /*public int[,] convertir(string str)
+        {
+            int k = Convert.ToInt32(size.Text);
+            int[,] array = new int[k, k];
+            string[] numbers = str.Split(',');
+            string[] numbers2 = new string[k] ;
+            
+
+
+               for (int i = 0; i < k; i++)
+            {
+               
+                
+                for (int j = 0; j < k; j++)
+                {
+                    numbers2.SetValue(numbers[i].Split(' '),i)  ;
+                    array[i, j] = Int32.Parse(numbers2[i * k + j]);
+                    
+                }
+                
+            }
+
+               /* for (int i = 0; i < k; i++)
+            {
+                for (int j = 0; j < k; j++)
+                {
+                    
+
+                    array[i, j] = Int32.Parse(numbers2[i * k + j]);
+                }
+            }
+
+            return array;
+        }*/
+        
+        
         public int[,] convertir(string str)
         {
 
@@ -74,23 +116,66 @@ namespace Matice_Operation
                 for (int j = 0; j < k; j++)
                 {
 
-                    if (str[count] != ',')
+                    
+                    if (str[count] == ',' )
                     {
-                        array[i, j] = Int32.Parse(str[count++] + "");
-
-                        count++;
+                       
+                            //array[i, j] = Int32.Parse(str[count] + "");
+                            count++;
+                        j--;
+                        
+                        
                     }
+                    else if (str[count] == ' ')
+                    {
+                        count++;
+                        j--;
+                    }
+                    
                     else
                     {
-
-                        count++;
+                        try
+                        {
+                        if(str[count+1] != ' ' && str[count + 1] != ',' )
+                        {
+                            if (str[count + 2] != ' ' && str[count + 2] != ',')
+                            {
+                                array[i, j] = Int32.Parse(str[count].ToString() + str[count + 1].ToString() + str[count + 2].ToString() );
+                                count++;
+                                count++;
+                                count++;
+                            }
+                            else
+                            {
+                                array[i, j] = Int32.Parse(str[count].ToString() + str[count + 1].ToString());
+                                count++;
+                                count++;
+                            }
+                        }
+                        else
+                        {
+                                array[i, j] = Int32.Parse(str[count] + "");
+                                count++;
+                        }
+                        }
+                        catch (Exception)
+                        {
+                            array[i, j] = Int32.Parse(str[count] + "");
+                            count++;
+                        }
+                        
+                        
+                        
                     }
                 }
-
             }
-
             return array;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public int[] convertir_1(string str)
         {
 
@@ -100,8 +185,6 @@ namespace Matice_Operation
 
             for (int i = 0; i < k * k; i++)
             {
-
-
                 if (str[count] != ',')
                 {
                     array[i] = Int32.Parse(str[count++] + "");
@@ -122,7 +205,6 @@ namespace Matice_Operation
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             int k = Convert.ToInt32(size.Text);
-
             int[,] list = new int[k, k];
 
             string operateur = Convert.ToString(op.Content);
@@ -248,7 +330,7 @@ namespace Matice_Operation
                 case "D":
                     Matrix matrix = Matrix.Parse(m1.Text);
                     double det = matrix.Determinant;
-                    res.Content = det+"";
+                    res.Content = det + "";
                     break;
                     /*case "Inv":
 
