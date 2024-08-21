@@ -1,22 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Matice_Operation
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaktionslogik für MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        #region
         public MainWindow()
         {
             InitializeComponent();
         }
+        #endregion
 
+
+        #region 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             m1.Text = "";
@@ -74,27 +87,27 @@ namespace Matice_Operation
             int[,] array = new int[k, k];
             string[] numbers = str.Split(',');
             string[] numbers2 = new string[k] ;
-            
+
 
 
                for (int i = 0; i < k; i++)
             {
-               
-                
+
+
                 for (int j = 0; j < k; j++)
                 {
                     numbers2.SetValue(numbers[i].Split(' '),i)  ;
                     array[i, j] = Int32.Parse(numbers2[i * k + j]);
-                    
+
                 }
-                
+
             }
 
                /* for (int i = 0; i < k; i++)
             {
                 for (int j = 0; j < k; j++)
                 {
-                    
+
 
                     array[i, j] = Int32.Parse(numbers2[i * k + j]);
                 }
@@ -102,8 +115,8 @@ namespace Matice_Operation
 
             return array;
         }*/
-        
-        
+
+
         public int[,] convertir(string str)
         {
 
@@ -116,98 +129,134 @@ namespace Matice_Operation
                 for (int j = 0; j < k; j++)
                 {
 
-                    
-                    if (str[count] == ',' )
+
+                    if (str[count] == ',')
                     {
-                       
-                            //array[i, j] = Int32.Parse(str[count] + "");
-                            count++;
+
+                        //array[i, j] = Int32.Parse(str[count] + "");
+                        count++;
                         j--;
-                        
-                        
+
+
                     }
                     else if (str[count] == ' ')
                     {
                         count++;
                         j--;
                     }
-                    
+
                     else
                     {
                         try
                         {
-                        if(str[count+1] != ' ' && str[count + 1] != ',' )
-                        {
-                            if (str[count + 2] != ' ' && str[count + 2] != ',')
+                            if (str[count + 1] != ' ' && str[count + 1] != ',')
                             {
-                                array[i, j] = Int32.Parse(str[count].ToString() + str[count + 1].ToString() + str[count + 2].ToString() );
-                                count++;
-                                count++;
-                                count++;
+                                if (str[count + 2] != ' ' && str[count + 2] != ',')
+                                {
+                                    array[i, j] = Int32.Parse(str[count].ToString() + str[count + 1].ToString() + str[count + 2].ToString());
+                                    count++;
+                                    count++;
+                                    count++;
+                                }
+                                else
+                                {
+                                    array[i, j] = Int32.Parse(str[count].ToString() + str[count + 1].ToString());
+                                    count++;
+                                    count++;
+                                }
                             }
                             else
                             {
-                                array[i, j] = Int32.Parse(str[count].ToString() + str[count + 1].ToString());
-                                count++;
-                                count++;
-                            }
-                        }
-                        else
-                        {
                                 array[i, j] = Int32.Parse(str[count] + "");
                                 count++;
-                        }
+                            }
                         }
                         catch (Exception)
                         {
                             array[i, j] = Int32.Parse(str[count] + "");
                             count++;
                         }
-                        
-                        
-                        
+
+
+
                     }
                 }
             }
             return array;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        public int[] convertir_1(string str)
+        public int[,] convertir_1(string str)
         {
-
             int k = Convert.ToInt32(size.Text);
-            int[] array = new int[k * k];
+            int[,] array = new int[k, k];
             int count = 0;
 
-            for (int i = 0; i < k * k; i++)
+            for (int i = 0; i < k; i++)
             {
-                if (str[count] != ',')
-                {
-                    array[i] = Int32.Parse(str[count++] + "");
-
-                    count++;
-                }
-                else
+                for (int j = 0; j < k; j++)
                 {
 
-                    count++;
+
+                    if (str[count] == ',')
+                    {
+
+                        //array[i, j] = Int32.Parse(str[count] + "");
+                        count++;
+                        j--;
+
+
+                    }
+                    else if (str[count] != ',')
+                    {
+                        count++;
+                        j--;
+                    }
+
+                    else
+                    {
+                        try
+                        {
+                            if (str[count + 1] != ' ' && str[count + 1] != ',')
+                            {
+                                if (str[count + 2] != ' ' && str[count + 2] != ',')
+                                {
+                                    array[i, j] = Int32.Parse(str[count].ToString() + str[count + 1].ToString() + str[count + 2].ToString());
+                                    count++;
+                                    count++;
+                                    count++;
+                                }
+                                else
+                                {
+                                    array[i, j] = Int32.Parse(str[count].ToString() + str[count + 1].ToString());
+                                    count++;
+                                    count++;
+                                }
+                            }
+                            else
+                            {
+                                array[i, j] = Int32.Parse(str[count] + "");
+                                count++;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            array[i, j] = Int32.Parse(str[count] + "");
+                            count++;
+                        }
+
+
+
+                    }
                 }
-
-
             }
-
             return array;
         }
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             int k = Convert.ToInt32(size.Text);
+
             int[,] list = new int[k, k];
 
-            string operateur = Convert.ToString(op.Content);
+            string? operateur = Convert.ToString(op.Content);
             switch (operateur)
             {
                 case "+": //Addition
@@ -328,9 +377,10 @@ namespace Matice_Operation
 
                     break;
                 case "D":
-                    Matrix matrix = Matrix.Parse(m1.Text);
-                    double det = matrix.Determinant;
-                    res.Content = det + "";
+                    int[,] matrixe1 = convertir(m1.Text);
+                    int determinant = CalculateDeterminant(matrixe1);
+                    
+                    res.Content = determinant + "";
                     break;
                     /*case "Inv":
 
@@ -350,6 +400,60 @@ namespace Matice_Operation
                         break;*/
             }
 
+        }
+
+        private static int[,] GetMinor(int[,] matrix, int col)
+        {
+            int rows = matrix.GetLength(0);
+            int cols = matrix.GetLength(1);
+
+            int[,] minor = new int[rows - 1, cols - 1];
+
+            int i = 0, j = 0;
+
+            for (int row = 1; row < rows; row++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    if (c != col)
+                    {
+                        minor[i, j] = matrix[row, c];
+                        j++;
+                    }
+                }
+                i++;
+                j = 0;
+            }
+
+            return minor;
+        }
+
+        public static int CalculateDeterminant(int[,] matrix)
+        {
+            int rows = matrix.GetLength(0);
+            int cols = matrix.GetLength(1);
+
+            if (rows != cols)
+            {
+                throw new Exception("The matrix must be square!");
+            }
+
+            if (rows == 2)
+            {
+                return matrix[0, 0] * matrix[1, 1] - matrix[0, 1] * matrix[1, 0];
+            }
+            else
+            {
+                int result = 0;
+
+                for (int i = 0; i < cols; i++)
+                {
+                    int[,] minor = GetMinor(matrix, i);
+                    result += (i % 2 == 1 ? -1 : 1) * matrix[0, i] * CalculateDeterminant(minor);
+                }
+
+                return result;
+            }
         }
 
         private void chek_Checked(object sender, RoutedEventArgs e)
@@ -413,5 +517,6 @@ namespace Matice_Operation
 
 
         }
+        #endregion
     }
 }

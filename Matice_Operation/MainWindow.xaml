@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Matice_Operation"
         mc:Ignorable="d"
-        Title="Matrice Rechner" Height="450" Width="800">
+        Title="Matrice Rechner" Height="450" Width="800"
+      Background="Beige">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="339*"/>
