@@ -81,42 +81,7 @@ namespace Matice_Operation
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        /*public int[,] convertir(string str)
-        {
-            int k = Convert.ToInt32(size.Text);
-            int[,] array = new int[k, k];
-            string[] numbers = str.Split(',');
-            string[] numbers2 = new string[k] ;
-
-
-
-               for (int i = 0; i < k; i++)
-            {
-
-
-                for (int j = 0; j < k; j++)
-                {
-                    numbers2.SetValue(numbers[i].Split(' '),i)  ;
-                    array[i, j] = Int32.Parse(numbers2[i * k + j]);
-
-                }
-
-            }
-
-               /* for (int i = 0; i < k; i++)
-            {
-                for (int j = 0; j < k; j++)
-                {
-
-
-                    array[i, j] = Int32.Parse(numbers2[i * k + j]);
-                }
-            }
-
-            return array;
-        }*/
-
-
+        
         public int[,] convertir(string str)
         {
 
@@ -129,11 +94,12 @@ namespace Matice_Operation
                 for (int j = 0; j < k; j++)
                 {
 
-
+                    try
+                    {
                     if (str[count] == ',')
                     {
 
-                        //array[i, j] = Int32.Parse(str[count] + "");
+                        
                         count++;
                         j--;
 
@@ -180,6 +146,13 @@ namespace Matice_Operation
 
 
                     }
+                    }
+                    catch (Exception)
+                    {
+
+                        MessageBox.Show(" one or two Matrix haven't the same size !!!!!");
+                    }
+                    
                 }
             }
             return array;
@@ -199,7 +172,7 @@ namespace Matice_Operation
                     if (str[count] == ',')
                     {
 
-                        //array[i, j] = Int32.Parse(str[count] + "");
+                       
                         count++;
                         j--;
 
@@ -263,7 +236,8 @@ namespace Matice_Operation
                     int[,] m_1 = convertir(m1.Text);
                     int[,] m_2 = convertir(m2.Text);
                     res.Content = "";
-                    res.Content += "**************************************************************************\n";
+                    
+
                     for (int i = 0; i < k; i++)
                     {
                         for (int j = 0; j < k; j++)
@@ -275,7 +249,18 @@ namespace Matice_Operation
                     {
                         for (int j = 0; j < k; j++)
                         {
-                            res.Content += list[i, j] + " "; ;
+                            if (list[i, j] < 10)
+                            {
+                                res.Content += list[i, j] + " ";
+                            }
+                            else if (list[i, j]>9 && list[i, j] < 100)
+                            {
+                                res.Content += list[i, j] + "  ";
+                            }
+                            else
+                            {
+                                res.Content += list[i, j] + "   ";
+                            }
                         }
                         res.Content += "\n";
                     }
@@ -285,7 +270,7 @@ namespace Matice_Operation
                     int[,] m_ = convertir(m1.Text);
                     int[,] m__ = convertir(m2.Text);
                     res.Content = "";
-                    res.Content += "**************************************************************************\n";
+                   
                     for (int i = 0; i < k; i++)
                     {
                         for (int j = 0; j < k; j++)
@@ -297,7 +282,18 @@ namespace Matice_Operation
                     {
                         for (int j = 0; j < k; j++)
                         {
-                            res.Content += list[i, j] + " "; ;
+                            if (list[i, j] < 10)
+                            {
+                                res.Content += list[i, j] + " ";
+                            }
+                            else if (list[i, j] > 9 && list[i, j] < 100)
+                            {
+                                res.Content += list[i, j] + "  ";
+                            }
+                            else
+                            {
+                                res.Content += list[i, j] + "   ";
+                            }
                         }
                         res.Content += "\n";
                     }
@@ -307,7 +303,7 @@ namespace Matice_Operation
                     int[,] mm1 = convertir(m1.Text);
                     int[,] mm2 = convertir(m2.Text);
                     res.Content = "";
-                    res.Content = "**************************************************************************\n";
+                   
 
                     for (int i = 0; i < k; i++)
                     {
@@ -324,7 +320,18 @@ namespace Matice_Operation
                     {
                         for (int j = 0; j < k; j++)
                         {
-                            res.Content += list[i, j] + " "; ;
+                            if (list[i, j] < 10)
+                            {
+                                res.Content += list[i, j] + " ";
+                            }
+                            else if (list[i, j] > 9 && list[i, j] < 100)
+                            {
+                                res.Content += list[i, j] + "  ";
+                            }
+                            else
+                            {
+                                res.Content += list[i, j] + "   ";
+                            }
                         }
                         res.Content += "\n";
                     }
@@ -335,29 +342,48 @@ namespace Matice_Operation
                     int[,] md1 = convertir(m1.Text);
                     int[,] md2 = convertir(m2.Text);
                     res.Content = "";
-                    res.Content = "**************************************************************************\n";
+                   
 
                     for (int i = 0; i < k; i++)
                     {
                         for (int j = 0; j < k; j++)
                         {
-                            list[i, j] = Int32.Parse(md1[i, j] + "") / Int32.Parse(md2[i, j] + "");
+                            try
+                            {
+                                list[i, j] = Int32.Parse(md1[i, j] + "") / Int32.Parse(md2[i, j] + "");
+                            }
+                            catch (DivideByZeroException)
+                            {
+
+                                list[i, j] = 0;
+                            }
+                            
                         }
                     }
                     for (int i = 0; i < k; i++)
                     {
                         for (int j = 0; j < k; j++)
                         {
-                            res.Content += list[i, j] + " "; ;
+                            if (list[i, j] < 10)
+                            {
+                                res.Content += list[i, j] + " ";
+                            }
+                            else if (list[i, j] > 9 && list[i, j] < 100)
+                            {
+                                res.Content += list[i, j] + "  ";
+                            }
+                            else
+                            {
+                                res.Content += list[i, j] + "   ";
+                            }
                         }
                         res.Content += "\n";
                     }
-
                     break;
                 case "%":
                     int[,] mmd1 = convertir(m1.Text);
                     res.Content = "";
-                    res.Content = "**************************************************************************\n";
+                    
                     int val = Int32.Parse(m2.Text + "");
                     for (int i = 0; i < k; i++)
                     {
@@ -370,7 +396,18 @@ namespace Matice_Operation
                     {
                         for (int j = 0; j < k; j++)
                         {
-                            res.Content += list[i, j] + " "; ;
+                            if (list[i, j] < 10)
+                            {
+                                res.Content += list[i, j] + " ";
+                            }
+                            else if (list[i, j] > 9 && list[i, j] < 100)
+                            {
+                                res.Content += list[i, j] + "  ";
+                            }
+                            else
+                            {
+                                res.Content += list[i, j] + "   ";
+                            }
                         }
                         res.Content += "\n";
                     }
