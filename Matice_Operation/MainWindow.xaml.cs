@@ -94,6 +94,7 @@ namespace Matice_Operation
                 for (int j = 0; j < k; j++)
                 {
 
+
                     try
                     {
                     if (str[count] == ',')

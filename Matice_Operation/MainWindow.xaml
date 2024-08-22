@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Matice_Operation"
         mc:Ignorable="d"
         Title="Matrice Rechner" Height="450" Width="800"
-      Background="Beige">
+        Background="Beige" 
+        Icon="/taschenrechner.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="339*"/>
