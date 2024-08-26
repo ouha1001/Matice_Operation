@@ -19,10 +19,10 @@ namespace Matice_Operation
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Index : Window
     {
         #region
-        public MainWindow()
+        public Index()
         {
             InitializeComponent();
         }
@@ -83,7 +83,7 @@ namespace Matice_Operation
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        
+
         public int[,] convertir(string str)
         {
 
@@ -159,7 +159,7 @@ namespace Matice_Operation
                         //MessageBox.Show(" one or two Matrix haven't the same size !!!!!");
                         throw;
                     }
-                    
+
                 }
             }
             return array;
@@ -179,7 +179,7 @@ namespace Matice_Operation
                     if (str[count] == ',')
                     {
 
-                       
+
                         count++;
                         j--;
 
@@ -242,37 +242,37 @@ namespace Matice_Operation
                 case "+": //Addition
                     if (!string.IsNullOrEmpty(m1.Text) && !string.IsNullOrEmpty(m2.Text))
                     {
-                    int[,] m_1 = convertir(m1.Text);
-                    int[,] m_2 = convertir(m2.Text);
-                    res.Content = "";
-                    
+                        int[,] m_1 = convertir(m1.Text);
+                        int[,] m_2 = convertir(m2.Text);
+                        res.Content = "";
 
-                    for (int i = 0; i < k; i++)
-                    {
-                        for (int j = 0; j < k; j++)
+
+                        for (int i = 0; i < k; i++)
                         {
-                            list[i, j] = Int32.Parse(m_1[i, j] + "") + Int32.Parse(m_2[i, j] + "");
-                        }
-                    }
-                    for (int i = 0; i < k; i++)
-                    {
-                        for (int j = 0; j < k; j++)
-                        {
-                            if (list[i, j] < 10)
+                            for (int j = 0; j < k; j++)
                             {
-                                res.Content += list[i, j] + " ";
-                            }
-                            else if (list[i, j]>9 && list[i, j] < 100)
-                            {
-                                res.Content += list[i, j] + "  ";
-                            }
-                            else
-                            {
-                                res.Content += list[i, j] + "   ";
+                                list[i, j] = Int32.Parse(m_1[i, j] + "") + Int32.Parse(m_2[i, j] + "");
                             }
                         }
-                        res.Content += "\n";
-                    }
+                        for (int i = 0; i < k; i++)
+                        {
+                            for (int j = 0; j < k; j++)
+                            {
+                                if (list[i, j] < 10)
+                                {
+                                    res.Content += list[i, j] + " ";
+                                }
+                                else if (list[i, j] > 9 && list[i, j] < 100)
+                                {
+                                    res.Content += list[i, j] + "  ";
+                                }
+                                else
+                                {
+                                    res.Content += list[i, j] + "   ";
+                                }
+                            }
+                            res.Content += "\n";
+                        }
 
 
                     }
@@ -281,7 +281,7 @@ namespace Matice_Operation
                         RefreshWindow();
                     }
                     break;
-                    
+
                 case "-": //Substraktion
                     if (m1.Text != "" && m2.Text != "")
                     {
