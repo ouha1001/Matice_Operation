@@ -50,6 +50,8 @@ namespace Matice_Operation
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            M2.IsEnabled = true;
+            m2.IsEnabled = true;
             Button btn = (Button)sender;
             op.Content = btn.Content;
             int[,] m_1 = convertir(m1.Text);
@@ -97,61 +99,65 @@ namespace Matice_Operation
 
                     try
                     {
-                    if (str[count] == ',')
-                    {
-
-                        
-                        count++;
-                        j--;
-
-
-                    }
-                    else if (str[count] == ' ')
-                    {
-                        count++;
-                        j--;
-                    }
-
-                    else
-                    {
-                        try
+                        if (count < str.Length)
                         {
-                            if (str[count + 1] != ' ' && str[count + 1] != ',')
+                            if (str[count] == ',')
                             {
-                                if (str[count + 2] != ' ' && str[count + 2] != ',')
-                                {
-                                    array[i, j] = Int32.Parse(str[count].ToString() + str[count + 1].ToString() + str[count + 2].ToString());
-                                    count++;
-                                    count++;
-                                    count++;
-                                }
-                                else
-                                {
-                                    array[i, j] = Int32.Parse(str[count].ToString() + str[count + 1].ToString());
-                                    count++;
-                                    count++;
-                                }
+
+
+                                count++;
+                                j--;
+
+
                             }
+                            else if (str[count] == ' ')
+                            {
+                                count++;
+                                j--;
+                            }
+
                             else
                             {
-                                array[i, j] = Int32.Parse(str[count] + "");
-                                count++;
+                                try
+                                {
+                                    if (str[count + 1] != ' ' && str[count + 1] != ',')
+                                    {
+                                        if (str[count + 2] != ' ' && str[count + 2] != ',')
+                                        {
+                                            array[i, j] = Int32.Parse(str[count].ToString() + str[count + 1].ToString() + str[count + 2].ToString());
+                                            count++;
+                                            count++;
+                                            count++;
+                                        }
+                                        else
+                                        {
+                                            array[i, j] = Int32.Parse(str[count].ToString() + str[count + 1].ToString());
+                                            count++;
+                                            count++;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        array[i, j] = Int32.Parse(str[count] + "");
+                                        count++;
+                                    }
+                                }
+                                catch (Exception)
+                                {
+                                    array[i, j] = Int32.Parse(str[count] + "");
+                                    count++;
+                                }
+
+
+
                             }
                         }
-                        catch (Exception)
-                        {
-                            array[i, j] = Int32.Parse(str[count] + "");
-                            count++;
-                        }
-
-
-
-                    }
                     }
                     catch (Exception)
                     {
 
-                        MessageBox.Show(" one or two Matrix haven't the same size !!!!!");
+                        //MessageBox.Show(" one or two Matrix haven't the same size !!!!!");
+                        throw;
                     }
                     
                 }
@@ -234,6 +240,8 @@ namespace Matice_Operation
             switch (operateur)
             {
                 case "+": //Addition
+                    if (!string.IsNullOrEmpty(m1.Text) && !string.IsNullOrEmpty(m2.Text))
+                    {
                     int[,] m_1 = convertir(m1.Text);
                     int[,] m_2 = convertir(m2.Text);
                     res.Content = "";
@@ -266,159 +274,198 @@ namespace Matice_Operation
                         res.Content += "\n";
                     }
 
-                    break;
-                case "-": //Substraktion
-                    int[,] m_ = convertir(m1.Text);
-                    int[,] m__ = convertir(m2.Text);
-                    res.Content = "";
-                   
-                    for (int i = 0; i < k; i++)
-                    {
-                        for (int j = 0; j < k; j++)
-                        {
-                            list[i, j] = Int32.Parse(m_[i, j] + "") - Int32.Parse(m__[i, j] + "");
-                        }
-                    }
-                    for (int i = 0; i < k; i++)
-                    {
-                        for (int j = 0; j < k; j++)
-                        {
-                            if (list[i, j] < 10)
-                            {
-                                res.Content += list[i, j] + " ";
-                            }
-                            else if (list[i, j] > 9 && list[i, j] < 100)
-                            {
-                                res.Content += list[i, j] + "  ";
-                            }
-                            else
-                            {
-                                res.Content += list[i, j] + "   ";
-                            }
-                        }
-                        res.Content += "\n";
-                    }
 
+                    }
+                    else
+                    {
+                        RefreshWindow();
+                    }
+                    break;
+                    
+                case "-": //Substraktion
+                    if (m1.Text != "" && m2.Text != "")
+                    {
+                        int[,] m_ = convertir(m1.Text);
+                        int[,] m__ = convertir(m2.Text);
+                        res.Content = "";
+
+                        for (int i = 0; i < k; i++)
+                        {
+                            for (int j = 0; j < k; j++)
+                            {
+                                list[i, j] = Int32.Parse(m_[i, j] + "") - Int32.Parse(m__[i, j] + "");
+                            }
+                        }
+                        for (int i = 0; i < k; i++)
+                        {
+                            for (int j = 0; j < k; j++)
+                            {
+                                if (list[i, j] < 10)
+                                {
+                                    res.Content += list[i, j] + " ";
+                                }
+                                else if (list[i, j] > 9 && list[i, j] < 100)
+                                {
+                                    res.Content += list[i, j] + "  ";
+                                }
+                                else
+                                {
+                                    res.Content += list[i, j] + "   ";
+                                }
+                            }
+                            res.Content += "\n";
+                        }
+                    }
+                    else
+                    {
+                        RefreshWindow();
+                    }
                     break;
                 case "*":  // Multiplikation
-                    int[,] mm1 = convertir(m1.Text);
-                    int[,] mm2 = convertir(m2.Text);
-                    res.Content = "";
-                   
-
-                    for (int i = 0; i < k; i++)
+                    if (!string.IsNullOrEmpty(m1.Text) && !string.IsNullOrEmpty(m2.Text))
                     {
-                        for (int j = 0; j < k; j++)
-                        {
-                            for (int s = 0; s < k; s++)
-                            {
-                                list[i, j] = list[i, j] + Int32.Parse(mm1[i, s] + "") * Int32.Parse(mm2[s, j] + "");
-                            }
+                        int[,] mm1 = convertir(m1.Text);
+                        int[,] mm2 = convertir(m2.Text);
+                        res.Content = "";
 
-                        }
-                    }
-                    for (int i = 0; i < k; i++)
-                    {
-                        for (int j = 0; j < k; j++)
+
+                        for (int i = 0; i < k; i++)
                         {
-                            if (list[i, j] < 10)
+                            for (int j = 0; j < k; j++)
                             {
-                                res.Content += list[i, j] + " ";
-                            }
-                            else if (list[i, j] > 9 && list[i, j] < 100)
-                            {
-                                res.Content += list[i, j] + "  ";
-                            }
-                            else
-                            {
-                                res.Content += list[i, j] + "   ";
+                                for (int s = 0; s < k; s++)
+                                {
+                                    list[i, j] = list[i, j] + Int32.Parse(mm1[i, s] + "") * Int32.Parse(mm2[s, j] + "");
+                                }
+
                             }
                         }
-                        res.Content += "\n";
+                        for (int i = 0; i < k; i++)
+                        {
+                            for (int j = 0; j < k; j++)
+                            {
+                                if (list[i, j] < 10)
+                                {
+                                    res.Content += list[i, j] + " ";
+                                }
+                                else if (list[i, j] > 9 && list[i, j] < 100)
+                                {
+                                    res.Content += list[i, j] + "  ";
+                                }
+                                else
+                                {
+                                    res.Content += list[i, j] + "   ";
+                                }
+                            }
+                            res.Content += "\n";
+                        }
                     }
-
+                    else
+                    {
+                        RefreshWindow();
+                    }
 
                     break;
                 case "/":
-                    int[,] md1 = convertir(m1.Text);
-                    int[,] md2 = convertir(m2.Text);
-                    res.Content = "";
-                   
-
-                    for (int i = 0; i < k; i++)
+                    if (!string.IsNullOrEmpty(m1.Text) && !string.IsNullOrEmpty(m2.Text))
                     {
-                        for (int j = 0; j < k; j++)
-                        {
-                            try
-                            {
-                                list[i, j] = Int32.Parse(md1[i, j] + "") / Int32.Parse(md2[i, j] + "");
-                            }
-                            catch (DivideByZeroException)
-                            {
+                        int[,] md1 = convertir(m1.Text);
+                        int[,] md2 = convertir(m2.Text);
+                        res.Content = "";
 
-                                list[i, j] = 0;
+
+                        for (int i = 0; i < k; i++)
+                        {
+                            for (int j = 0; j < k; j++)
+                            {
+                                try
+                                {
+                                    list[i, j] = Int32.Parse(md1[i, j] + "") / Int32.Parse(md2[i, j] + "");
+                                }
+                                catch (DivideByZeroException)
+                                {
+
+                                    list[i, j] = 0;
+                                }
+
                             }
-                            
+                        }
+                        for (int i = 0; i < k; i++)
+                        {
+                            for (int j = 0; j < k; j++)
+                            {
+                                if (list[i, j] < 10)
+                                {
+                                    res.Content += list[i, j] + " ";
+                                }
+                                else if (list[i, j] > 9 && list[i, j] < 100)
+                                {
+                                    res.Content += list[i, j] + "  ";
+                                }
+                                else
+                                {
+                                    res.Content += list[i, j] + "   ";
+                                }
+                            }
+                            res.Content += "\n";
                         }
                     }
-                    for (int i = 0; i < k; i++)
+                    else
                     {
-                        for (int j = 0; j < k; j++)
-                        {
-                            if (list[i, j] < 10)
-                            {
-                                res.Content += list[i, j] + " ";
-                            }
-                            else if (list[i, j] > 9 && list[i, j] < 100)
-                            {
-                                res.Content += list[i, j] + "  ";
-                            }
-                            else
-                            {
-                                res.Content += list[i, j] + "   ";
-                            }
-                        }
-                        res.Content += "\n";
+                        RefreshWindow();
                     }
                     break;
                 case "%":
-                    int[,] mmd1 = convertir(m1.Text);
-                    res.Content = "";
-                    
-                    int val = Int32.Parse(m2.Text + "");
-                    for (int i = 0; i < k; i++)
+                    if (!string.IsNullOrEmpty(m1.Text) && !string.IsNullOrEmpty(m2.Text))
                     {
-                        for (int j = 0; j < k; j++)
-                        {
-                            list[i, j] = Int32.Parse(mmd1[i, j] + "") % val;
-                        }
-                    }
-                    for (int i = 0; i < k; i++)
-                    {
-                        for (int j = 0; j < k; j++)
-                        {
-                            if (list[i, j] < 10)
-                            {
-                                res.Content += list[i, j] + " ";
-                            }
-                            else if (list[i, j] > 9 && list[i, j] < 100)
-                            {
-                                res.Content += list[i, j] + "  ";
-                            }
-                            else
-                            {
-                                res.Content += list[i, j] + "   ";
-                            }
-                        }
-                        res.Content += "\n";
-                    }
+                        int[,] mmd1 = convertir(m1.Text);
+                        res.Content = "";
 
+                        int val = Int32.Parse(m2.Text + "");
+                        for (int i = 0; i < k; i++)
+                        {
+                            for (int j = 0; j < k; j++)
+                            {
+                                list[i, j] = Int32.Parse(mmd1[i, j] + "") % val;
+                            }
+                        }
+                        for (int i = 0; i < k; i++)
+                        {
+                            for (int j = 0; j < k; j++)
+                            {
+                                if (list[i, j] < 10)
+                                {
+                                    res.Content += list[i, j] + " ";
+                                }
+                                else if (list[i, j] > 9 && list[i, j] < 100)
+                                {
+                                    res.Content += list[i, j] + "  ";
+                                }
+                                else
+                                {
+                                    res.Content += list[i, j] + "   ";
+                                }
+                            }
+                            res.Content += "\n";
+                        }
+                    }
+                    else
+                    {
+                        RefreshWindow();
+                    }
                     break;
                 case "D":
-                    int[,] matrixe1 = convertir(m1.Text);
-                    int determinant = CalculateDeterminant(matrixe1);
-                    
-                    res.Content = determinant + "";
+                    if (!string.IsNullOrEmpty(m1.Text))
+                    {
+                        int[,] matrixe1 = convertir(m1.Text);
+                        int determinant = CalculateDeterminant(matrixe1);
+
+                        res.Content = determinant + "";
+                    }
+                    else
+                    {
+                        RefreshWindow();
+                    }
                     break;
                     /*case "Inv":
 
@@ -500,6 +547,7 @@ namespace Matice_Operation
             if (chek.IsChecked == true)
             {
                 chek1.IsChecked = false;
+                matrice2.Content = "Matrice 2 :";
             }
             else
             {
@@ -510,7 +558,8 @@ namespace Matice_Operation
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-
+            M2.IsEnabled = true;
+            m2.IsEnabled = true;
             Button btn = (Button)sender;
             op.Content = btn.Content;
             int[,] m_1 = convertir(m1.Text);
@@ -535,7 +584,6 @@ namespace Matice_Operation
         {
             M2.IsEnabled = false;
             matrice2.IsEnabled = false;
-            m2.IsEnabled = false;
             Button btn = (Button)sender;
             op.Content = btn.Content;
             int[,] m_1 = convertir(m1.Text);
@@ -554,6 +602,21 @@ namespace Matice_Operation
             }
 
 
+        }
+        public void RefreshWindow()
+        {
+            // Reinitialize all controls to their default state
+            MessageBox.Show("one or tow Matrices are empty!!!!!!!!");
+            m1.Text = "";
+            m2.Text = "";
+            M1.Content = "";
+            M2.Content = "";
+            res.Content = "";
+            op.Content = "";
+            size.Text = "";
+            M2.IsEnabled = true;
+            matrice2.IsEnabled = true;
+            m2.IsEnabled = true;
         }
         #endregion
     }
