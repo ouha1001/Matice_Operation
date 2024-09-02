@@ -4,7 +4,7 @@ The UI (User Interface) has various input fields to enter two matrices (or a sin
 
 Here's a brief rundown of how this code works:
 
-* The constructor MainWindow() initializes the components of the UI.
+* The constructor Index() initializes the components of the UI.
 
 * The Button_Click methods handle the various button clicks on the UI. These include clearing the fields, performing the selected operation, and more.
 
